@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@viz-js/viz": "^3.31.0",
+    "puppeteer": "^25.18.1"
+  }
+}

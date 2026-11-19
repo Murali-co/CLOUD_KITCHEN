@@ -1,4 +1,4 @@
-N# GourmetCloud: Cloud Kitchen Management & Online Food Ordering Platform
+# GourmetCloud: Cloud Kitchen Management & Online Food Ordering Platform
 
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev)
