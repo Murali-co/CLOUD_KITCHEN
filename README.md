@@ -1,4 +1,4 @@
-# GourmetCloud: Cloud Kitchen Management & Online Food Ordering Platform
+N# GourmetCloud: Cloud Kitchen Management & Online Food Ordering Platform
 
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev)
@@ -65,21 +65,60 @@ The GourmetCloud platform utilizes a polyglot persistence architecture combining
 
 ---
 
-## 3. Directory Structure
+## 3. Database Design: ER Model & Relational Schema (Requirements E, H, I)
+
+The database architecture is strictly normalized to 3NF/BCNF across **22 tables**, **35 foreign keys**, **20 unique constraints**, **33 domain CHECK constraints**, and **29 B-tree secondary performance indexes**.
+
+Detailed theoretical documentation, formal Chen specifications, schema dictionary, and normalization proofs are documented in **[`docs/ER_AND_RELATIONAL_SCHEMA.md`](docs/ER_AND_RELATIONAL_SCHEMA.md)**.
+
+### 3.1 Academic Standard Chen ER Model (Peter Chen Notation)
+*Complete university DBMS textbook ER model featuring rectangles (strong entities), double rectangles (weak entities), ovals (simple attributes), underlined ovals (PKs), dashed ovals (derived attributes), diamonds (relationships), double diamonds (identifying relationships), double lines (total participation), and cardinalities (1:1, 1:N, M:N).*
+
+<p align="center">
+  <img src="ER_Model_Cloud_Kitchen.png" alt="Standard Chen ER Model" width="100%">
+</p>
+
+- **Draw.io Editable Source:** [`ER_Model_Cloud_Kitchen.drawio`](ER_Model_Cloud_Kitchen.drawio)
+- **Vector SVG Artifact:** [`ER_Model_Cloud_Kitchen.svg`](ER_Model_Cloud_Kitchen.svg)
+- **High-Resolution PNG (4800x3900):** [`ER_Model_Cloud_Kitchen.png`](ER_Model_Cloud_Kitchen.png)
+
+### 3.2 Academic Relational Schema Diagram (Tabular Notation)
+*Standard relational schema diagram modeling all 22 relations as rectangular tables with shaded headers, dedicated PK/FK key classification columns, attribute-name columns, and directional referential integrity connectors.*
+
+<p align="center">
+  <img src="Relational_Schema_Cloud_Kitchen.png" alt="Standard Relational Schema Diagram" width="100%">
+</p>
+
+- **Draw.io Editable Source:** [`Relational_Schema_Cloud_Kitchen.drawio`](Relational_Schema_Cloud_Kitchen.drawio)
+- **Vector SVG Artifact:** [`Relational_Schema_Cloud_Kitchen.svg`](Relational_Schema_Cloud_Kitchen.svg)
+- **High-Resolution PNG (4800x3641):** [`Relational_Schema_Cloud_Kitchen.png`](Relational_Schema_Cloud_Kitchen.png)
+
+### 3.3 Engineering Crow's Foot ER & Physical Schema Views
+*Additional engineering diagrams compiled via Graphviz (`assets/diagrams/er_model.png` and `assets/diagrams/relational_schema.png`) are documented in [`docs/ER_AND_RELATIONAL_SCHEMA.md`](docs/ER_AND_RELATIONAL_SCHEMA.md).*
+
+---
+
+## 4. Directory Structure
 
 ```
 PROJECT/
 ├── README.md                      # Primary project overview and technical documentation
 ├── .env.example                   # Baseline environment configuration template
+├── assets/                        # Design assets and compiled visual diagrams
+│   └── diagrams/                  # Publication-grade database architecture diagrams
+│       ├── er_model.png           # High-resolution Crow's Foot ER Model (300 DPI)
+│       ├── relational_schema.png  # High-resolution Physical Relational Schema Diagram
+│       ├── er_model.dot           # Graphviz DOT source for ER Model
+│       ├── relational_schema.dot  # Graphviz DOT source for Physical Schema
+│       ├── er_model.mmd           # Mermaid.js source definition
+│       ├── er_model.svg           # Scalable vector graphics artifact
+│       └── relational_schema.svg  # Scalable vector graphics artifact
 ├── docs/                          # Comprehensive technical documentation
+│   ├── ER_AND_RELATIONAL_SCHEMA.md # Master 22-entity ER model, Chen tables, Relational Schema & 3NF/BCNF Proofs
 │   ├── DBMS_RUBRIC_COMPLIANCE.md     # Academic DBMS evaluation rubric compliance matrix & Viva Q&A
-│   ├── ER_DIAGRAM.md                 # Updated 22-entity visual Mermaid ER diagram & cardinality
-│   ├── RELATIONAL_SCHEMA.md          # Formal relational schema in academic notation (22 tables)
-│   ├── DATA_DICTIONARY.md            # Comprehensive data dictionary for all 22 tables
+│   ├── MYSQL_ROLE_PRIVILEGE_MANAGEMENT.md # MySQL 8.0 RBAC, Privilege Matrix, GRANT/REVOKE, PoLP
 │   ├── REDIS_DESIGN.md               # Redis NoSQL data structures, TTL, commands & CRUD harness
 │   ├── FINAL_ARCHITECTURE_REPORT.md  # System layers, data flow, RBAC, Redis topology
-│   ├── MYSQL_ROLE_PRIVILEGE_MANAGEMENT.md # MySQL 8.0 RBAC, Privilege Matrix, GRANT/REVOKE, PoLP
-│   ├── DBMS_RUBRIC_COMPLIANCE.md     # Full rubric audit, Next.js proposal, Viva Q&A
 │   ├── API_REFERENCE.md              # Complete REST endpoint inventory (14 modules)
 │   ├── TEST_REPORT.md                # 98-test suite report, Workflows A–E, concurrency
 │   ├── SECURITY_AUDIT.md             # OWASP Top 10, IDOR, SQLi, and authentication review
@@ -154,6 +193,7 @@ backend/.venv/bin/pytest backend/tests -v
 ```bash
 cd frontend
 npm run build
+```
 
 ---
 
@@ -161,9 +201,9 @@ npm run build
 
 | Rubric Requirement | File Location | Key Capabilities Demonstrated |
 | :--- | :--- | :--- |
-| **Requirement H (ER Diagram)** | `docs/ER_DIAGRAM.md` | Full 22-entity Mermaid diagram, attributes, keys, polymorphic identity decomposition, cardinality. |
-| **Requirement I (Relational Schema)** | `docs/RELATIONAL_SCHEMA.md` | Academic notation, candidate keys, composite FKs, referential action matrix, ORM mismatch audit. |
-| **Requirement I (Data Dictionary)** | `docs/DATA_DICTIONARY.md` | Column types, constraints, nullability, defaults, descriptions for all 22 tables. |
+| **Requirement E & H (ER Model)** | `docs/ER_AND_RELATIONAL_SCHEMA.md`<br>`assets/diagrams/er_model.png` | Publication-grade 22-entity Crow's Foot ER diagram, Chen specification tables, strong/weak entities, cardinalities. |
+| **Requirement B, C, F & I (Relational Schema)** | `docs/ER_AND_RELATIONAL_SCHEMA.md`<br>`assets/diagrams/relational_schema.png` | Formal 3NF/BCNF relational notation, data dictionary, candidate keys, composite FKs, referential cascading matrix, normalization proofs. |
+| **Requirement G (Data Dictionary)** | `docs/ER_AND_RELATIONAL_SCHEMA.md` | Full column data types, constraints, nullability, defaults, descriptions for all 22 tables. |
 | **Requirement J (DDL & Verification)** | `database/schema.sql`<br>`backend/scripts/verify_database.py` | 22 CREATE TABLE definitions, domain CHECK constraints, B-tree indexes, safe verification script. |
 | **Requirement K & P (Redis NoSQL)** | `docs/REDIS_DESIGN.md`<br>`backend/scripts/redis_crud_demo.py`<br>`backend/tests/test_redis_crud.py` | Redis Hashes, Strings, TTL, Sorted Sets leaderboard, Pub/Sub, CRUD script, automated tests. |
 | **Requirement M (DML Operations)** | `database/dml_operations.sql` | INSERT (single/multi-row), SELECT, UPDATE, safe DELETE, `START TRANSACTION`, `COMMIT`, `ROLLBACK`. |
