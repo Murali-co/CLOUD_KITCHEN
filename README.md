@@ -154,7 +154,6 @@ backend/.venv/bin/pytest backend/tests -v
 ```bash
 cd frontend
 npm run build
-```
 
 ---
 
